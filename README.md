@@ -56,7 +56,7 @@ Célula B: repositório B → Vercel B → Supabase B → PWA B
 2. Crie um **projeto Supabase novo e vazio**, na conta da própria célula.
 3. Execute `supabase/migrations/20261103000000_kairos_initial.sql` no SQL Editor do projeto novo **uma única vez**, ou use o fluxo versionado de migrações do [guia detalhado](docs/INSTALL.md). Jamais execute no AGAPE original.
 4. Copie `.env.example` para `.env.local` apenas no computador do ADM técnico; defina `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` e `SESSION_SECRET`. Não faça commit.
-5. Em ambiente local confiável, instale as dependências (`npm ci` quando o lockfile estiver disponível ou `npm install`) e crie o primeiro ADM com `npm run create-admin`.
+5. Em ambiente local confiável, instale as dependências (`npm ci` após gerar o lockfile (ou `npm install` enquanto ele ainda estiver pendente)) e crie o primeiro ADM com `npm run create-admin`.
 6. Importe o repositório na **Vercel** da célula, adicionando as mesmas três variáveis como **secretas**. Deploy via Git ao publicar em `main`.
 7. Abra o PWA e entre com o ADM. Configure a identidade da sua célula.
 

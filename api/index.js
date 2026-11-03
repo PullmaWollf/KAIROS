@@ -1,3 +1,4 @@
+import {makePng} from './_png.js';
 import {dbClient,DEFAULTS,HttpError,txt,assertText,uuid,authRole,originCheck,hashPassword,verifyPassword,createSession,sessionCookie,currentUser,toPublic,dbQuery,brandSafe} from './_core.js';
 function response(res,status,data){res.setHeader('Cache-Control','no-store');return res.status(status).json(data);}
 function needPost(method){if(method!=='POST')throw new HttpError(405,'Use POST');}
@@ -18,13 +19,19 @@ export default async function handler(req,res){
    originCheck(req);
    if(Number(req.headers?.['content-length']||0)>7500000)throw new HttpError(413,'Payload muito grande');
   }
+  if(route==='icon-192'||route==='icon-512'){
+   if(method!=='GET')throw new HttpError(405,'Método não permitido');
+   const png=makePng(route==='icon-192'?192:512);
+   res.setHeader('Content-Type','image/png');res.setHeader('Cache-Control','public, max-age=86400');
+   return res.status(200).send(png);
+  }
   const db=dbClient();
   if(route==='manifest'){
    const branding=await getBrand(db);
    const logo=branding.logo_url;
    const icons=logo?[{src:logo,sizes:'512x512',type:'image/png',purpose:'any'}]:[
-     {src:'/icons/icon-192.svg',sizes:'192x192',type:'image/svg+xml',purpose:'any'},
-     {src:'/icons/icon-512.svg',sizes:'512x512',type:'image/svg+xml',purpose:'any'}
+     {src:'/api/icon-192',sizes:'192x192',type:'image/png',purpose:'any'},
+     {src:'/api/icon-512',sizes:'512x512',type:'image/png',purpose:'any'}
    ];
    res.setHeader('Cache-Control','no-store');res.setHeader('Content-Type','application/manifest+json; charset=utf-8');
    return res.status(200).send(JSON.stringify({id:'/',name:branding.name,short_name:branding.name.slice(0,24),start_url:'/',scope:'/',display:'standalone',lang:'pt-BR',background_color:branding.background,theme_color:branding.primary,icons}));

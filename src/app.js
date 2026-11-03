@@ -144,6 +144,15 @@ async function loadUsers(){
  const list=$('user-list');if(!list)return;
  try{state.users=(await api('users')).users;list.innerHTML=state.users.map(u=>'<article class="panel"><div class="row"><div><strong>'+escape(u.name)+'</strong><p class="helper">'+escape(u.login)+' • '+escape(u.role)+'</p></div><span class="tag">'+(u.active?'Ativo':'Inativo')+'</span></div></article>').join('')||empty('Sem usuários');}catch(e){list.textContent=e.message;}
 }
+async function logoData(file){
+ const image=await createImageBitmap(file);
+ try{
+  const size=Math.min(image.width,image.height);
+  const canvas=document.createElement('canvas');canvas.width=512;canvas.height=512;
+  canvas.getContext('2d').drawImage(image,(image.width-size)/2,(image.height-size)/2,size,size,0,0,512,512);
+  return canvas.toDataURL('image/png');
+ }finally{image.close?.();}
+}
 async function fileData(file,max=4*1024*1024){
  if(!file)throw new Error('Selecione um arquivo');
  if(file.size>max)throw new Error('Arquivo muito grande (máximo 4 MB)');
@@ -167,7 +176,7 @@ function bindForms(){
  bind('#branding-form','submit',e=>{e.preventDefault();submit(e.currentTarget,async d=>{
   const previous=state.public.branding;
   const branding={...previous,...d,show_decorations:e.currentTarget.querySelector('[name="show_decorations"]').checked};
-  for(const kind of ['logo','hero']){const file=$(kind+'-file')?.files[0];if(file){if(!['image/png','image/jpeg','image/webp'].includes(file.type))throw new Error('Use PNG, JPEG ou WebP');const data=await fileData(file);branding[kind+'_url']=(await api('upload',{kind,data})).url;}}
+  for(const kind of ['logo','hero']){const file=$(kind+'-file')?.files[0];if(file){if(!['image/png','image/jpeg','image/webp'].includes(file.type))throw new Error('Use PNG, JPEG ou WebP');const data=kind==='logo'?await logoData(file):await fileData(file);branding[kind+'_url']=(await api('upload',{kind,data})).url;}}
   await api('branding-save',{branding});
  });});
  bind('[data-delete-post]','click',async e=>{if(!confirm('Excluir publicação?'))return;try{await api('post-delete',{id:e.currentTarget.dataset.deletePost});await refresh();}catch(x){notification(x.message);}});
