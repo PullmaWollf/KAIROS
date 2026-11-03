@@ -1,9 +1,13 @@
 <div align="center">
 
+<img src="public/icons/icon.svg" width="84" height="84" alt="Ícone KAIRÓS" />
+
 # ✨ KAIRÓS
 ### A plataforma da sua comunidade, com a identidade da sua célula.
 
-**PWA White Label · Independência por instalação · Código aberto para auditoria**
+**PWA White Label · Independência por instalação · Código-fonte auditável**
+
+[![Qualidade](https://github.com/PullmaWollf/KAIROS/actions/workflows/quality.yml/badge.svg)](https://github.com/PullmaWollf/KAIROS/actions/workflows/quality.yml) ![Node.js 24](https://img.shields.io/badge/Node.js-24-339933?logo=node.js&logoColor=white) ![Supabase](https://img.shields.io/badge/Banco-Supabase-3FCF8E?logo=supabase&logoColor=white) ![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel&logoColor=white)
 
 [Começar](#-instalação) · [Arquitetura](docs/ARCHITECTURE.md) · [Segurança](docs/SECURITY.md) · [Automação](docs/AUTOMATION.md) · [Roadmap](docs/ROADMAP.md)
 
