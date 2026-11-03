@@ -45,3 +45,48 @@
 - Rodar a pipeline de testes e monitorar logs do Vercel.
 
 Mais informações: [Segurança](SECURITY.md) · [Arquitetura](ARCHITECTURE.md) · [Automação](AUTOMATION.md).
+
+## Passos no Windows (PowerShell)
+
+Na pasta do projeto:
+
+```powershell
+# 1) Clonar sua própria cópia do repositório
+git clone https://github.com/SEU-USUARIO/SEU-REPO.git
+cd SEU-REPO
+
+# 2) Instalar dependências fixadas
+npm ci
+
+# 3) Criar arquivo local (não será enviado ao GitHub)
+Copy-Item .env.example .env.local
+notepad .env.local
+```
+
+Substitua os exemplos do arquivo por **valores do Supabase da sua célula**. Gere o segredo de sessão no PowerShell com Node:
+
+```powershell
+node -e "console.log(require('node:crypto').randomBytes(48).toString('hex'))"
+```
+
+Copie o segredo gerado para `SESSION_SECRET` em `.env.local`. **Nunca envie o arquivo para este chat nem para terceiros.**
+
+Depois:
+
+```powershell
+npm run doctor
+npm run create-admin
+```
+
+O primeiro comando confere se o banco da célula tem as tabelas e o bucket esperados. O segundo cadastra o ADM inicial. Após criar a conta, retire `ADMIN_PASSWORD` do arquivo local; guarde a senha com segurança.
+
+## Erros comuns
+
+| Sintoma | Causa provável | Correção |
+| --- | --- | --- |
+| Banco não configurado | Variáveis ausentes no Vercel | Preencher `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` e `SESSION_SECRET` |
+| Relation app_users does not exist | Migração ainda não aplicada | Aplicar SQL inicial no Supabase **novo** |
+| Sessão expirada | Cookie ou segredo trocado | Entrar novamente; conferir segredo definido |
+| Login não funciona | Ainda não existe ADM inicial | Executar `npm run create-admin` num ambiente confiável |
+| Imagem não carrega | Bucket ausente / URL inválida | Conferir `kairos-public` e bucket público |
+| Não consigo instalar o PWA | Site sem HTTPS ou requisitos do navegador | Abrir domínio HTTPS e conferir manifesto/ícones |

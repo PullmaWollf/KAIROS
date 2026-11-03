@@ -56,9 +56,10 @@ Célula B: repositório B → Vercel B → Supabase B → PWA B
 2. Crie um **projeto Supabase novo e vazio**, na conta da própria célula.
 3. Execute `supabase/migrations/20261103000000_kairos_initial.sql` no SQL Editor do projeto novo **uma única vez**, ou use o fluxo versionado de migrações do [guia detalhado](docs/INSTALL.md). Jamais execute no AGAPE original.
 4. Copie `.env.example` para `.env.local` apenas no computador do ADM técnico; defina `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` e `SESSION_SECRET`. Não faça commit.
-5. Em ambiente local confiável, instale as dependências (`npm ci` com o lockfile versionado) e crie o primeiro ADM com `npm run create-admin`.
-6. Importe o repositório na **Vercel** da célula, adicionando as mesmas três variáveis como **secretas**. Deploy via Git ao publicar em `main`.
-7. Abra o PWA e entre com o ADM. Configure a identidade da sua célula.
+5. Em ambiente local confiável, execute `npm ci`, crie `.env.local` a partir de `.env.example` e cadastre o primeiro ADM com `npm run create-admin`.
+6. Execute `npm run doctor` para conferir a configuração do seu Supabase.
+7. Importe o repositório na **Vercel** da célula, adicionando as mesmas três variáveis como **secretas**. Deploy via Git ao publicar em `main`.
+8. Abra o PWA e entre com o ADM. Configure a identidade da sua célula.
 
 📖 **Tutorial completo:** [docs/INSTALL.md](docs/INSTALL.md).  
 ⚙️ **Automação segura:** [docs/AUTOMATION.md](docs/AUTOMATION.md).
@@ -73,6 +74,7 @@ O botão **clona/implanta o código e pede variáveis**; ele **não** cria o pro
 
 ```bash
 npm ci
+npm run doctor  # depois de criar .env.local e Supabase
 npm test
 npm run check
 npm run dev
