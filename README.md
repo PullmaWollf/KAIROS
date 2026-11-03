@@ -1,3 +1,13 @@
+> [!IMPORTANT]
+> **REPOSITÓRIO HISTÓRICO — o projeto KAIRÓS foi separado.**
+>
+> - **[KAIROS-CORE](https://github.com/PullmaWollf/KAIROS-CORE):** aplicativo PWA e template-base de cada célula.
+> - **[KAIROS-INSTALLER](https://github.com/PullmaWollf/KAIROS-INSTALLER):** instalador guiado independente.
+>
+> Para novas instalações e contribuições, utilize os dois repositórios acima. Este repositório mantém o protótipo inicial para referência. O AGAPE original permanece separado.
+
+---
+
 <div align="center">
 
 <img src="public/icons/icon.svg" width="84" height="84" alt="Ícone KAIRÓS" />
