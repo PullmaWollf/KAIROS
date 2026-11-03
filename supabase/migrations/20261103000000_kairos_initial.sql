@@ -74,7 +74,7 @@ alter table public.attendance enable row level security;
 alter table public.schedule_items enable row level security;
 alter table public.study_material enable row level security;
 revoke all on public.app_users,public.app_settings,public.posts,public.meetings,
-  public.attendance,public.schedule_items,public.study_material from anon,authenticated;
+  public.attendance,public.schedule_items,public.study_material from anon,authenticated,public;
 -- O servidor usa chave service_role, nunca exposta ao navegador.
 insert into storage.buckets(id,name,public,file_size_limit,allowed_mime_types)
 values('kairos-public','kairos-public',true,5242880,array['image/png','image/jpeg','image/webp','application/pdf'])

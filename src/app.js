@@ -182,7 +182,7 @@ function bindForms(){
  bind('[data-delete-post]','click',async e=>{if(!confirm('Excluir publicação?'))return;try{await api('post-delete',{id:e.currentTarget.dataset.deletePost});await refresh();}catch(x){notification(x.message);}});
  bind('[data-delete-meeting]','click',async e=>{if(!confirm('Excluir encontro e suas chamadas?'))return;try{await api('meeting-delete',{id:e.currentTarget.dataset.deleteMeeting});await refresh();}catch(x){notification(x.message);}});
  bind('[data-delete-schedule]','click',async e=>{try{await api('schedule-delete',{id:e.currentTarget.dataset.deleteSchedule});await refresh();}catch(x){notification(x.message);}});
- bind('[data-call]','click',async e=>{state.page='attendance';navigation();await render();const select=document.querySelector('#attendance-open select');if(select)select.value=e.currentTarget.dataset.call;});
+ bind('[data-call]','click',async e=>{const meetingId=e.currentTarget.dataset.call;state.page='attendance';navigation();await render();const select=document.querySelector('#attendance-open select');if(select)select.value=meetingId;});
  bind('#attendance-open','submit',async e=>{
   e.preventDefault();const id=e.currentTarget.meeting_id.value;try{
    const result=await api('attendance-read',undefined,'?id='+encodeURIComponent(id));

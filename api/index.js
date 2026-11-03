@@ -76,7 +76,7 @@ export default async function handler(req,res){
    let user;
    if(req.body?.id){
     const target=uuid(req.body.id);
-    if(target===u.id&&role!=='admin')throw new HttpError(400,'Não é permitido retirar seu próprio acesso administrativo');
+    if(target===u.id&&(role!=='admin'||req.body?.active===false))throw new HttpError(400,'Você não pode desativar ou remover sua própria conta administrativa');
     const payload={name,login,role,active:req.body?.active!==false};
     if(req.body?.password){
      const old=await dbQuery(db.from('app_users').select('session_version').eq('id',target).single());

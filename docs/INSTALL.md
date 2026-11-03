@@ -16,7 +16,7 @@
 6. Para evolução com CLI e migrações versionadas, use `supabase login`, `supabase link --project-ref <REF>` e `supabase db push` seguindo a documentação oficial; não reaplique migrações SQL já executadas manualmente.
 
 ## 3. Primeiro administrador
-1. Tenha Node 24 e execute `npm install` no computador confiável.
+1. Tenha Node 24 e execute `npm ci` no computador confiável.
 2. Defina `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_LOGIN`, `ADMIN_NAME` e `ADMIN_PASSWORD` no ambiente do processo (não no repositório).
 3. Rode `npm run create-admin`. O script se recusa a sobrescrever uma conta admin existente.
 4. Exclua do histórico de shell credenciais digitadas de maneira insegura; prefira gerenciador de segredos. Não reutilize senhas.
