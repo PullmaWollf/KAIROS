@@ -1,7 +1,7 @@
 # Instalação automatizada — estudo de viabilidade
 
 ## Resumo da decisão
-**Adotar automação assistida em duas etapas.** Não prometer "um clique cria tudo" sem OAuth autorizado e sem infraestrutura de provisionamento adicional.
+**Adotar automação assistida em duas etapas.** O aplicativo guiado de onboarding da fase 1 foi publicado em [`../installer/`](../installer/README.md) com testes de validação e sem processamento de segredos. Não prometer "um clique cria tudo" sem OAuth autorizado e sem infraestrutura de provisionamento adicional.
 
 ### Etapa 1: Automação viável agora
 - **GitHub Template Repository:** cria cópia do código para a célula.

@@ -9,7 +9,7 @@
 
 [![Qualidade](https://github.com/PullmaWollf/KAIROS/actions/workflows/quality.yml/badge.svg)](https://github.com/PullmaWollf/KAIROS/actions/workflows/quality.yml) ![Node.js 24](https://img.shields.io/badge/Node.js-24-339933?logo=node.js&logoColor=white) ![Supabase](https://img.shields.io/badge/Banco-Supabase-3FCF8E?logo=supabase&logoColor=white) ![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel&logoColor=white)
 
-[Começar](#-instalação) · [Arquitetura](docs/ARCHITECTURE.md) · [Segurança](docs/SECURITY.md) · [Automação](docs/AUTOMATION.md) · [Roadmap](docs/ROADMAP.md)
+[Começar](#-instalação) · [Instalador guiado](installer/README.md) · [Arquitetura](docs/ARCHITECTURE.md) · [Segurança](docs/SECURITY.md) · [Automação](docs/AUTOMATION.md) · [Roadmap](docs/ROADMAP.md)
 
 </div>
 
@@ -51,6 +51,12 @@ Célula B: repositório B → Vercel B → Supabase B → PWA B
 - **Backend**: Node.js na Vercel; credenciais privilegiadas ficam SOMENTE no servidor.
 - **Dados**: PostgreSQL e Storage Supabase com bloqueio de acesso direto às tabelas do app.
 - **Instalação**: navegador compatível com PWA; modo offline limitado ao aviso de conexão.
+
+## 🧭 Instalador guiado — novas células
+
+O **KAIRÓS Installer v0.1** está disponível em [`installer/`](installer/README.md) como aplicativo web estático independente do banco: orienta a criação das próprias contas GitHub, Supabase e Vercel, gera comandos vinculados ao projeto da célula e oferece checklist para validação. **Não solicita ou armazena credenciais, não provisiona recursos remotamente.**
+
+O instalador poderá ganhar domínio e repositório próprios na evolução do produto, com OAuth consentido. A documentação detalha a transição para provisionamento autorizado.
 
 ## 🚀 Instalação
 

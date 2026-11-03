@@ -2,6 +2,14 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/installer",
+      "destination": "/installer/index.html"
+    },
+    {
+      "source": "/installer/",
+      "destination": "/installer/index.html"
+    },
+    {
       "source": "/manifest.webmanifest",
       "destination": "/api/index?route=manifest"
     },
@@ -10,7 +18,7 @@
       "destination": "/api/index?route=:route"
     },
     {
-      "source": "/((?!api/|src/|icons/|sw\\.js$|offline\\.html$|manifest\\.webmanifest$|favicon\\.svg$).*)",
+      "source": "/((?!api/|installer/|src/|icons/|sw\\.js$|offline\\.html$|manifest\\.webmanifest$|favicon\\.svg$).*)",
       "destination": "/index.html"
     }
   ],
