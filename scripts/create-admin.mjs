@@ -1,0 +1,15 @@
+import {createClient} from '@supabase/supabase-js';
+import {hashPassword} from '../api/_core.js';
+const required=['SUPABASE_URL','SUPABASE_SERVICE_ROLE_KEY','ADMIN_LOGIN','ADMIN_PASSWORD'];
+const missing=required.filter(k=>!process.env[k]);if(missing.length)throw new Error('Variáveis obrigatórias: '+missing.join(', '));
+if(!/^https:\/\/[^/]+\.supabase\.co$/.test(process.env.SUPABASE_URL))throw new Error('URL do Supabase inválida');
+const db=createClient(process.env.SUPABASE_URL,process.env.SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false}});
+const {data:admins,error:err}=await db.from('app_users').select('id').eq('role','admin').limit(1);
+if(err)throw new Error('Migração não aplicada ou banco indisponível: '+err.message);
+if(admins?.length)throw new Error('Já existe um administrador; bootstrap bloqueado.');
+const login=process.env.ADMIN_LOGIN.toLowerCase().trim(),name=(process.env.ADMIN_NAME||'Administrador').trim();
+if(!/^[a-z0-9._-]{3,40}$/.test(login)||name.length<2)throw new Error('Nome ou login inválido');
+const password_hash=await hashPassword(process.env.ADMIN_PASSWORD);
+const {error}=await db.from('app_users').insert({name,login,role:'admin',password_hash});
+if(error)throw new Error(error.message);
+console.log('Administrador cadastrado. Remova ADMIN_PASSWORD do ambiente temporário.');
